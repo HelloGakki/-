@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkman.Domain", "Linkman.Domain\Linkman.Domain.csproj", "{387388E2-B586-42A7-B702-0370475B06C3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkman.UnitTests", "Linkman.UnitTest\Linkman.UnitTests.csproj", "{38D7F2AD-3B27-4929-9F48-E42923AABFC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Linkman.WebUI", "Linkman.WebUI\Linkman.WebUI.csproj", "{BA0C5C26-6CD5-44FF-987A-46A559294F73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{387388E2-B586-42A7-B702-0370475B06C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{387388E2-B586-42A7-B702-0370475B06C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{387388E2-B586-42A7-B702-0370475B06C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{387388E2-B586-42A7-B702-0370475B06C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38D7F2AD-3B27-4929-9F48-E42923AABFC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38D7F2AD-3B27-4929-9F48-E42923AABFC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38D7F2AD-3B27-4929-9F48-E42923AABFC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38D7F2AD-3B27-4929-9F48-E42923AABFC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0C5C26-6CD5-44FF-987A-46A559294F73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0C5C26-6CD5-44FF-987A-46A559294F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0C5C26-6CD5-44FF-987A-46A559294F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0C5C26-6CD5-44FF-987A-46A559294F73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
