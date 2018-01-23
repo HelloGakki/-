@@ -7,6 +7,7 @@ using Ninject;
 using Moq;
 using Linkman.Domain.Abstract;
 using Linkman.Domain.Entities;
+using Linkman.Domain.Concrete;
 
 namespace Linkman.WebUI.Infrastructure
 {
@@ -32,14 +33,8 @@ namespace Linkman.WebUI.Infrastructure
         // 需要注入的接口
         private void AllBinding()
         {
-            Mock<IPeopleRepository> mock = new Mock<IPeopleRepository>();
-            mock.Setup(x => x.People).Returns(new List<Person>
-            {
-                new Person { Name = "应凌峰", Gender = EGender.male, Department = EDepartment.yfb},
-                new Person { Name = "徐烽", Gender = EGender.male, Department = EDepartment.gcb},
-                new Person { Name = "斯燕", Gender = EGender.female, Department = EDepartment.cgb}
-            });
-            _kernel.Bind<IPeopleRepository>().ToConstant(mock.Object);
+
+            _kernel.Bind<IPeopleRepository>().To<EFPersonRepository>();
         }
 
         #endregion
