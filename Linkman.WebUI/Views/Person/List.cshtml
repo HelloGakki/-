@@ -1,12 +1,15 @@
 ﻿@using Linkman.Domain.Entities
 @using Linkman.Domain.Abstract
-@model IEnumerable<Person>
+@using Linkman.WebUI.Models
+@using Linkman.WebUI.HtmlHelpers
+
+@model  PersonListViewModel
 
 @{
     ViewBag.Title = "People";
 }
 
-@foreach (var p in Model)
+@foreach (var p in Model.People)
 {
     <div>
         <h3>@p.Name (@p.Department.GetDisplayName())</h3>
@@ -20,4 +23,7 @@
          }
     </div>
 }
+<div>
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x}))
+</div>
 
