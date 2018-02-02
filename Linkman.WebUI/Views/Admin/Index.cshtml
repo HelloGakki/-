@@ -1,0 +1,46 @@
+﻿@using Linkman.Domain.Abstract
+@model IEnumerable<Linkman.Domain.Entities.Person>
+
+@{
+    ViewBag.Title = "Admin: All People -- 让吾赐予你们权限(・ω・)";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<p>
+    @Html.ActionLink("Create new", "Create")
+</p>
+
+<table class="table table-bordered table-hover table-striped table-condensed">
+    <tr>
+        <th class="text-center">@Html.DisplayNameFor(x => x.PersonID)</th>
+        <th class="text-center">@Html.DisplayNameFor(x => x.Name)</th>
+        <th class="text-center">@Html.DisplayNameFor(x => x.Gender)</th>
+        <th class="text-center">@Html.DisplayNameFor(x => x.Age)</th>
+        <th class="text-center">@Html.DisplayNameFor(x => x.Department)</th>
+        <th class="text-center">@Html.DisplayNameFor(x => x.Mobile)</th>
+        <th class="text-center">@Html.DisplayNameFor(x => x.Tel)</th>
+        <th class="text-center">@Html.DisplayNameFor(x => x.TelExt)</th>
+        <th class="text-center">@Html.DisplayNameFor(x => x.Email)</th>
+        <th></th>
+    </tr>
+    @foreach (var person in Model)
+    {
+        <tr>
+            <td class="panel-danger">@person.PersonID</td>
+            <td>@Html.ActionLink(person.Name, "Edit", new { person.PersonID})</td>
+            <td>@person.Gender.GetDisplayName()</td>
+            <td>@person.Age</td>
+            <td>@person.Department.GetDisplayName()</td>
+            <td>@person.Mobile</td>
+            <td>@person.Tel</td>
+            <td>@person.TelExt</td>
+            <td>@person.Email</td>
+            <td>
+                @using (Html.BeginForm("Delete", "Admin"))
+                {
+                    @Html.Hidden("PersonID", person.PersonID);
+                    <input type="submit" class="btn btn-default btn-xs" value="Delete" />
+                }
+            </td>
+        </tr>
+    }
+</table>

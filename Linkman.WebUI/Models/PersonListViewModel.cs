@@ -10,5 +10,6 @@ namespace Linkman.WebUI.Models
     {
         public IEnumerable<Person> People { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public string CurrentCategory { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace Linkman.UnitTest
             controller.PageSize = 3;
 
             // 动作
-            IEnumerable<Person> result = (IEnumerable<Person>)controller.List(2).Model;
+            IEnumerable<Person> result = ((PersonListViewModel)controller.List(null, 2).Model).People;
 
             // 断言
             Person[] personArray = result.ToArray();
@@ -60,9 +60,37 @@ namespace Linkman.UnitTest
             MvcHtmlString result = myHtmlHelper.PageLinks(pagingInfo, pageUrlDelegate);
             System.Diagnostics.Debug.WriteLine("during :" + result.ToString());
             // 断言
-            Assert.AreEqual(@"<a class=""btn btn-default"" href=""Page1"">1</a>" + 
+            Assert.AreEqual(@"<a class=""btn btn-default"" href=""Page1"">1</a>" +
                 @"<a class=""btn btn-default btn-primary selected"" href=""Page2"">2</a>" +
                 @"<a class=""btn btn-default"" href=""Page3"">3</a>", result.ToString());
+        }
+
+        [TestMethod]
+        public void Can_Create_Categories()
+        {
+            // 准备 —— 创建数据库
+            Mock<IPeopleRepository> mock = new Mock<IPeopleRepository>();
+            mock.Setup(m => m.People).Returns(new Person[]
+                {
+                    new Person { PersonID = 1, Name = "P1", Department = EDepartment.boss},
+                    new Person { PersonID = 2, Name = "P2", Department = EDepartment.yfb},
+                    new Person { PersonID = 3, Name = "P3", Department = EDepartment.yfb},
+                    new Person { PersonID = 4, Name = "P4", Department = EDepartment.yfb},
+                    new Person { PersonID = 5, Name = "P5", Department = EDepartment.xsb},
+                    new Person { PersonID = 6, Name = "P6", Department = EDepartment.xsb}
+                });
+
+            // 准备 —— 创建控制器
+            NavController nav = new NavController(mock.Object);
+
+            // 获取分类集合
+            EDepartment[] result = ((IEnumerable<EDepartment>)nav.Menu().Model).ToArray();
+
+            // 断言
+            Assert.AreEqual(result.Length, 3);
+            Assert.AreEqual(result[0], EDepartment.boss);
+            Assert.AreEqual(result[1], EDepartment.yfb);
+            Assert.AreEqual(result[2], EDepartment.xsb);
         }
     }
 }

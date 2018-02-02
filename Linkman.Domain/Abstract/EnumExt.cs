@@ -25,6 +25,23 @@ namespace Linkman.Domain.Abstract
         }
 
         /// <summary>
+        /// 获取特性 (CategoryAttribute) 的名称；如果未使用该特性，则返回枚举的名称。
+        /// </summary>
+        /// <param name="enumValue"></param>
+        /// <returns></returns>
+        public static string GetCategroy(this Enum enumValue)
+        {
+            //FieldInfo fieldInfo = enumValue.GetType().GetField(enumValue.ToString());
+            Type type = enumValue.GetType();
+            FieldInfo fieldInfo = type.GetField(enumValue.ToString());
+
+            CategoryAttribute[] attrs =
+                fieldInfo.GetCustomAttributes(typeof(CategoryAttribute), false) as CategoryAttribute[];
+
+            return attrs.Length > 0 ? attrs[0].Category : enumValue.ToString();
+        }
+
+        /// <summary>
         /// 获取特性 (DisplayAttribute) 的说明；如果未使用该特性，则返回枚举的名称。
         /// </summary>
         /// <param name="enumValue"></param>

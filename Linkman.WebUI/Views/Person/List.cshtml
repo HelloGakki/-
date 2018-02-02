@@ -11,19 +11,10 @@
 
 @foreach (var p in Model.People)
 {
-    <div>
-        <h3>@p.Name (@p.Department.GetDisplayName())</h3>
-         @if (p.Mobile != null)
-         {
-             @p.Mobile;
-         }
-         else
-         {
-             <p>无号码</p>
-         }
-    </div>
+   @Html.Partial("PersonSummary", p);
 }
 <div>
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", new { page = x}))
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List", 
+    new { category = Model.CurrentCategory, page = x}))
 </div>
 

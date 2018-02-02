@@ -1,0 +1,21 @@
+﻿@using Linkman.Domain.Abstract
+
+@model Linkman.Domain.Entities.Person
+<div class="card">
+    <h3>
+        <strong>@Model.Name</strong>
+        <span>@Model.Gender.GetDisplayName()</span>
+        <span class="pull-right label label-primary"> @Model.Department.GetDisplayName() </span>
+    </h3>
+    <address>
+        <p>
+            <strong>手机:</strong>
+            @Model.Mobile
+        </p>
+        <p>
+            <strong>邮箱:</strong>
+            <a href="mailto:@Model.Email">@Model.Email</a>
+        </p>
+    </address>
+  
+</div>

@@ -19,15 +19,21 @@ namespace Linkman.WebUI.Controllers
             this._repository = peopleRepository;
         }
 
-        public ViewResult List(int page = 1)
+        public ViewResult List(string category, int page = 1)
         {
-            PersonListViewModel model = new PersonListViewModel();
-            model.People = _repository.People.OrderBy(p => p.PersonID).Skip((page - 1) * PageSize).Take(PageSize);
-            model.PagingInfo = new PagingInfo
+             PersonListViewModel model = new PersonListViewModel
             {
-                CurrentPage = page,
-                ItemsPerPage = PageSize,
-                TotalItem = _repository.People.Count()
+                People = _repository.People
+                .Where(p => category == null || p.Department.GetCategroy() == category)
+                .OrderBy(p => p.Department).Skip((page - 1) * PageSize)
+                .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItem = _repository.People.Where(p => category == null || p.Department.GetCategroy() == category).Count()
+                },
+                CurrentCategory = category
             };
             return View(model);
         }

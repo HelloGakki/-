@@ -1,0 +1,14 @@
+﻿@using Linkman.Domain.Abstract
+@using Linkman.Domain.Entities
+
+@model IEnumerable<EDepartment>
+
+@Html.ActionLink("Home", "List", "Person", null,
+    new { @class = "btn btn-block btn-default btn-lg" })
+@foreach (var link in Model)
+{
+    @Html.RouteLink(link.GetDisplayName(),
+    new { controller = "Person", action = "List", category = link.GetCategroy(), page = 1 },
+    new { @class = "btn btn-block btn-default btn-lg" + (link.GetCategroy() == ViewBag.SelectedCategory ? " btn-primary" : "") }
+    )
+}
