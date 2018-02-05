@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace Linkman.Domain.Entities
 {
@@ -13,9 +14,9 @@ namespace Linkman.Domain.Entities
 
     public enum EGender
     {
-        [Display(Name = "♂")]
+        [Display(Name = "男")]
         male,
-        [Display(Name = "♀")]
+        [Display(Name = "女")]
         female
     }
     public enum EDepartment
@@ -77,30 +78,46 @@ namespace Linkman.Domain.Entities
 
     public class Person
     {
+        [HiddenInput(DisplayValue = false)]
         [DisplayName("ID")]
         public int PersonID { get; set; }
 
+        [Required(ErrorMessage = "Please enter a name")]
         [DisplayName("姓名")]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Please enter a gender")]
+        [RegularExpression(@"male|female", ErrorMessage = "Please enter male or female")]
         [DisplayName("性别")]
         public EGender Gender { get; set; }
 
+        [Required(ErrorMessage = "Please enter an age")]
+        [Range(0, 1000, ErrorMessage = "Please enter an age")]
         [DisplayName("年龄")]
         public int? Age { get; set; }
 
+        [Required(ErrorMessage = "Please enter an mobilephone number")]
+        [RegularExpression(@"0?(13|14|15|17|18|19)[0-9]{9}", ErrorMessage = "Please enter an mobilephone number")]
         [DisplayName("手机")]
         public string Mobile { get; set; }
 
+        [Required(ErrorMessage = "Please enter a telphone number")]
+        [RegularExpression(@"\d{7,8}", ErrorMessage = "Please enter a telphone number")]
         [DisplayName("座机")]
         public string Tel { get; set; }
 
+        [Required(ErrorMessage = "Please enter a tel-ext")]
+        [RegularExpression(@"\d{4}", ErrorMessage = "Please enter a tel-ext")]
         [DisplayName("分机号")]
         public string TelExt { get; set; }
 
+        [Required(ErrorMessage = "Please enter an email")]
+        [RegularExpression(@"\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}", ErrorMessage = "Please enter an email")]
         [DisplayName("邮件")]
-        public string Email{ get; set; }
+        public string Email { get; set; }
 
+        [Required(ErrorMessage = "Please enter a department code")]
+        [Range(0, 16, ErrorMessage = "Please enter a department code")]
         [DisplayName("部门")]
         public EDepartment Department { get; set; }
     }

@@ -1,0 +1,35 @@
+﻿@using Linkman.Domain.Abstract
+@using Linkman.Domain.Entities
+
+@model IEnumerable<string>
+
+@{
+    ViewBag.Title = "部门代码";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Code</title>
+</head>
+<body>
+    <div class="table">
+        <table>
+            <tr>
+                <th>部门</th>
+                <th>代码</th>
+            </tr>
+            @foreach (var p in Model)
+            {
+                EDepartment department = ((EDepartment)Enum.Parse(typeof(EDepartment), p));
+                <tr>
+                    <td>@department.GetDisplayName()</td>
+                    <td>@((int)department)</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

@@ -1,21 +1,29 @@
 ﻿@using Linkman.Domain.Abstract
 
 @model Linkman.Domain.Entities.Person
-<div class="card">
-    <h3>
-        <strong>@Model.Name</strong>
-        <span>@Model.Gender.GetDisplayName()</span>
-        <span class="pull-right label label-primary"> @Model.Department.GetDisplayName() </span>
-    </h3>
-    <address>
+<div class="card bg-light text-dark">
+    <div class="card-body">
         <p>
-            <strong>手机:</strong>
-            @Model.Mobile
+            <h3>
+                <strong>@Model.Name</strong>
+                <small>@Model.Gender.GetDisplayName()</small>
+                <span class="float-lg-right btn-lg btn-primary"> @Model.Department.GetDisplayName() </span>
+            </h3>
         </p>
-        <p>
-            <strong>邮箱:</strong>
-            <a href="mailto:@Model.Email">@Model.Email</a>
-        </p>
-    </address>
-  
+        <address>
+            <p>
+                <strong>手机:</strong>
+                @Model.Mobile
+            </p>
+            <p>
+                <strong>座机:</strong>
+                @Model.Tel-@Model.TelExt
+            </p>
+            <p>
+                <strong>邮箱:</strong>
+                <a href="mailto:@Model.Email">@Model.Email</a>
+            </p>
+        </address>
+    </div>
 </div>
+<br>

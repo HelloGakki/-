@@ -10,5 +10,7 @@ namespace Linkman.Domain.Abstract
     public interface IPeopleRepository
     {
         IEnumerable<Person> People { get; }
+        void SavePerson(Person person);
+        Person DeletePerson(int personId);
     }
 }

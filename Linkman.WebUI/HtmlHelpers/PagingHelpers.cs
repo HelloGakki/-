@@ -13,20 +13,26 @@ namespace Linkman.WebUI.HtmlHelpers
         public static MvcHtmlString PageLinks(this HtmlHelper html, PagingInfo pagingInfo, Func<int, string> pageUrl)
         {
             StringBuilder result = new StringBuilder();
+            TagBuilder baseTag = new TagBuilder("ul");
+
+            baseTag.AddCssClass("pagination");
             for (int i = 1; i <= pagingInfo.TotalPages; i++)
             {
-                TagBuilder tag = new TagBuilder("a");
-                tag.MergeAttribute("href", pageUrl (i));
-                tag.InnerHtml = i.ToString();
+                TagBuilder aTag = new TagBuilder("a");
+                TagBuilder liTag = new TagBuilder("li");
+
+                liTag.AddCssClass("page-item");
+                aTag.MergeAttribute("href", pageUrl(i));
+                aTag.InnerHtml = i.ToString();
                 if (i == pagingInfo.CurrentPage)
                 {
-                    tag.AddCssClass("selected");
-                    tag.AddCssClass("btn-primary");
+                    liTag.AddCssClass("active");
                 }
-                tag.AddCssClass("btn btn-default");
-                result.Append(tag.ToString());
+                aTag.AddCssClass("page-link");
+                result.Append(liTag.ToString().Replace("\">", "\">" + aTag.ToString()));
             }
-            return MvcHtmlString.Create(result.ToString());
+            //baseTag.ToString().Replace(">", ">" + result.ToString());
+            return MvcHtmlString.Create(baseTag.ToString().Replace("\">", "\">" + result.ToString()));
         }
     }
 }

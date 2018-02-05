@@ -60,9 +60,11 @@ namespace Linkman.UnitTest
             MvcHtmlString result = myHtmlHelper.PageLinks(pagingInfo, pageUrlDelegate);
             System.Diagnostics.Debug.WriteLine("during :" + result.ToString());
             // 断言
-            Assert.AreEqual(@"<a class=""btn btn-default"" href=""Page1"">1</a>" +
-                @"<a class=""btn btn-default btn-primary selected"" href=""Page2"">2</a>" +
-                @"<a class=""btn btn-default"" href=""Page3"">3</a>", result.ToString());
+            Assert.AreEqual(@"<ul class=""pagination"">" +
+                @"<li class=""page-item""><a class=""page-link"" href=""Page1"">1</a></li>" +
+                @"<li class=""active page-item""><a class=""page-link"" href=""Page2"">2</a></li>" +
+                @"<li class=""page-item""><a class=""page-link"" href=""Page3"">3</a></li>" +
+                @"</ul>", result.ToString());
         }
 
         [TestMethod]

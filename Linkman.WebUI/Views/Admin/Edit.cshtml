@@ -1,0 +1,44 @@
+﻿@using Linkman.Domain.Abstract
+@using Linkman.Domain.Entities
+
+@model Linkman.Domain.Entities.Person
+
+@{
+    ViewBag.Title = "Admin: Edit " + @Model.Name;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        <h3>Edit @Model.Name</h3>
+    </div>
+    @using (Html.BeginForm("Edit", "Admin"))
+    {
+        <div class="card-body">
+            @Html.HiddenFor(x => x.PersonID)
+            @foreach (var property in ViewData.ModelMetadata.Properties)
+            {
+                if (property.PropertyName != "PersonID")
+                {
+                    <div class="form-group">
+                        <label>@(property.DisplayName ?? property.PropertyName)</label>
+                        @if (property.PropertyName == "Department")
+                        {
+                            @Html.TextBox(property.PropertyName, (int)property.Model, new { @class = "form-control" })
+                            @Html.ActionLink("部门代码?", "Code", null, new { @class= "btn btn-default" })
+                        }
+                        else
+                        {
+                            @Html.TextBox(property.PropertyName, null, new { @class = "form-control" })
+                        }
+                        <p>@Html.ValidationMessage(property.PropertyName)</p>
+                    </div>
+                }
+            }
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Cancel and return to list", "Index", "Admin", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+
